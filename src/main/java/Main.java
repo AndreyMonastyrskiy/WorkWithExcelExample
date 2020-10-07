@@ -74,6 +74,39 @@ public class Main {
             }
             System.out.println("Total rows read: " + counter);
             smol1.write(new FileOutputStream(patch + "out\\Smolensk\\мамки_1_ребенок.xls"));
+
+            System.out.println("Work with мамки_многодетки.xls");
+            HSSFWorkbook smol2 = new HSSFWorkbook(new FileInputStream(patch + "Смоленск\\мамки_многодетки.xls"));
+            HSSFSheet sml2Sheet = smol2.getSheetAt(0);
+            counter = 0;
+            rowIterator = sml2Sheet.iterator();
+            while (rowIterator.hasNext())
+            {
+                Row row = rowIterator.next();
+                if (counter < 1) {
+                    Cell fioCell = row.createCell(11, CellType.STRING);
+                    Cell snilsCell = row.createCell(12, CellType.STRING);
+                    fioCell.setCellValue("ФИО законного представителя");
+                    snilsCell.setCellValue("СНИЛС законного представителя");
+                    counter++;
+                    continue;
+                }
+                if (zakonPredstavitel.containsKey(row.getCell(4).getStringCellValue())) {
+                    Cell fioCell = row.createCell(11, CellType.STRING);
+                    Cell snilsCell = row.createCell(12, CellType.STRING);
+                    Predstavitel predstavitel = zakonPredstavitel.get(row.getCell(4).getStringCellValue());
+                    fioCell.setCellValue(predstavitel.fio);
+                    snilsCell.setCellValue(predstavitel.snils);
+                }
+                counter++;
+            }
+            System.out.println("Total rows read: " + counter);
+            smol2.write(new FileOutputStream(patch + "out\\Smolensk\\мамки_многодетки.xls"));
+
+
+
+
+
             System.out.println("Completed");
 
         } catch (IOException e) {
