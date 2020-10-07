@@ -20,7 +20,6 @@ public class Main {
             XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(patch + "Законные представители.xlsx"));
             HashMap<String, Predstavitel> zakonPredstavitel = new HashMap<>();
             XSSFSheet zeroSheet = workbook.getSheetAt(0);
-            //Iterate through each rows one by one
             Iterator<Row> rowIterator = zeroSheet.iterator();
             int counter = 1;
             while (rowIterator.hasNext())
@@ -37,12 +36,7 @@ public class Main {
             }
             workbook.close();
             System.out.println("Total rows read: " + counter);
-           /* if (zakonPredstavitel.containsKey("164-457-766 00")) {
-                System.out.println(zakonPredstavitel.get("164-457-766 00").fio + " " +
-                        zakonPredstavitel.get("164-457-766 00").snils);
-            } else {
-                System.out.println("Snils not found!");
-            }*/
+
             System.out.println("Work with мамки_1_ребенок.xls");
             HSSFWorkbook smol1 = new HSSFWorkbook(new FileInputStream(patch + "Смоленск\\мамки_1_ребенок.xls"));
             HSSFSheet sml1Sheet = smol1.getSheetAt(0);
